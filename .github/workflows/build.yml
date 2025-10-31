@@ -1,15 +1,12 @@
 name: Go
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v3
 
@@ -35,10 +32,8 @@ jobs:
     - name: Build
       run: make pre-build && make build-win && make build-linux
       
-    - name: Upload a Build Artifact
+    - name: Upload Build Artifact
       uses: actions/upload-artifact@v3.1.0
       with:
-        # Artifact name
         name: IridiumNG
-        # A file, directory or wildcard pattern that describes what to upload
         path: ./build
